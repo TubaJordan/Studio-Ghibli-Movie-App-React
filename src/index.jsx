@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 
-import { MainView } from "./components/main-view/main-view"
+import { MainView } from "./components/main-view/main-view";
 
 // Import statment to indicate that you need to bindle `./index.scss`
 import "./index.scss";

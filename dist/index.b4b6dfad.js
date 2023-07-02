@@ -27314,7 +27314,7 @@ const MainView = ()=>{
     _s();
     const [movies, setMovies] = (0, _react.useState)([
         {
-            _id: 1,
+            id: 1,
             title: "Pom Poko",
             description: "A community of magical shape-shifting raccoon dogs struggle to prevent their forest home from being destroyed by urban development.",
             genre: {
@@ -27331,7 +27331,7 @@ const MainView = ()=>{
             featured: false
         },
         {
-            _id: 2,
+            id: 2,
             title: "From Up On Poppy Hill",
             description: "From Up on Poppy Hill follows Umi, a young schoolgirl who runs her family's lodging house, where she lives with her grandmother and siblings while their mother is away in America. Umi's father died in the Korean War, and she raises flags every day from Poppy Hill as a memorial.",
             genre: {
@@ -27347,7 +27347,7 @@ const MainView = ()=>{
             featured: false
         },
         {
-            _id: 3,
+            id: 3,
             title: "Porco Rosso",
             description: "Set in a fictional late 19th century, it follows the adventures of a boy and girl who are trying to keep a powerful crystal from the army, a group of secret agents, and a family of pirates, while searching for a legendary floating castle.",
             genre: {
@@ -27385,7 +27385,7 @@ const MainView = ()=>{
                 onMovieClick: (newSelectedMovie)=>{
                     setSelectedMovie(newSelectedMovie);
                 }
-            }, movie._id, false, {
+            }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 73,
                 columnNumber: 17
@@ -27396,7 +27396,7 @@ const MainView = ()=>{
         columnNumber: 9
     }, undefined);
 };
-_s(MainView, "2uCvDnaMxKs/6Xo0jL3gMOkbIRs=");
+_s(MainView, "1sVb/dIViB9gT2UD9Mimf19hLB8=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");

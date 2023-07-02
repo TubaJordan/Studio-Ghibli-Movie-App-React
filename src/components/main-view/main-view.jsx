@@ -5,7 +5,7 @@ import { MovieView } from "../movie-view/movie-view"
 export const MainView = () => {
     const [movies, setMovies] = useState([
         {
-            _id: 1,
+            id: 1,
             title: "Pom Poko",
             description: "A community of magical shape-shifting raccoon dogs struggle to prevent their forest home from being destroyed by urban development.",
             genre: {
@@ -22,7 +22,7 @@ export const MainView = () => {
             featured: false
         },
         {
-            _id: 2,
+            id: 2,
             title: "From Up On Poppy Hill",
             description: "From Up on Poppy Hill follows Umi, a young schoolgirl who runs her family's lodging house, where she lives with her grandmother and siblings while their mother is away in America. Umi's father died in the Korean War, and she raises flags every day from Poppy Hill as a memorial.",
             genre: {
@@ -38,7 +38,7 @@ export const MainView = () => {
             featured: false
         },
         {
-            _id: 3,
+            id: 3,
             title: "Porco Rosso",
             description: "Set in a fictional late 19th century, it follows the adventures of a boy and girl who are trying to keep a powerful crystal from the army, a group of secret agents, and a family of pirates, while searching for a legendary floating castle.",
             genre: {
@@ -70,7 +70,7 @@ export const MainView = () => {
     return (
         <div>
             {movies.map((movie) => (
-                <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => {
+                <MovieCard key={movie.id} movie={movie} onMovieClick={(newSelectedMovie) => {
                     setSelectedMovie(newSelectedMovie);
                 }}
                 />
