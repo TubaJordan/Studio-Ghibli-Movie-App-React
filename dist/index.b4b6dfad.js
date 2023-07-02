@@ -2950,8 +2950,8 @@ var _indexScss = require("./index.scss");
 const MyFlixApplication = ()=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainView.MainView), {}, void 0, false, {
         fileName: "src/index.jsx",
-        lineNumber: 11,
-        columnNumber: 9
+        lineNumber: 10,
+        columnNumber: 12
     }, undefined);
 };
 _c = MyFlixApplication;
@@ -2961,7 +2961,7 @@ const root = (0, _client.createRoot)(container);
 //Tells react to render your app in the root DOM element
 root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(MyFlixApplication, {}, void 0, false, {
     fileName: "src/index.jsx",
-    lineNumber: 20,
+    lineNumber: 18,
     columnNumber: 13
 }, undefined));
 var _c;
