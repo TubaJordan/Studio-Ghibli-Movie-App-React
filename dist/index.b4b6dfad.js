@@ -28286,7 +28286,7 @@ const MovieView = ({ movie, onBackClick })=>{
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: `${movie.genre.name.charAt(0).toUpperCase()}${movie.genre.name.slice(1)}`
+                        children: `${movie.genres.name.charAt(0).toUpperCase()}${movie.genres.name.slice(1)}`
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 19,
