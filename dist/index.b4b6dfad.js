@@ -27319,10 +27319,10 @@ const MainView = ()=>{
             console.log(data);
             const moviesFromApi = data.map((movie)=>{
                 return {
-                    id: movie._id,
+                    _id: movie._id,
                     title: movie.title,
                     description: movie.description,
-                    genre: {
+                    genres: {
                         name: movie.genre.name
                     },
                     director: {
@@ -27355,7 +27355,7 @@ const MainView = ()=>{
                 onMovieClick: (newSelectedMovie)=>{
                     setSelectedMovie(newSelectedMovie);
                 }
-            }, movie.id, false, {
+            }, movie._id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 43,
                 columnNumber: 17
@@ -27415,7 +27415,7 @@ MovieCard.propTypes = {
             name: (0, _propTypesDefault.default).string.isRequired
         }).isRequired
     }).isRequired,
-    onBackClick: (0, _propTypesDefault.default).func.isRequired
+    onMovieClick: (0, _propTypesDefault.default).func.isRequired
 };
 var _c;
 $RefreshReg$(_c, "MovieCard");
