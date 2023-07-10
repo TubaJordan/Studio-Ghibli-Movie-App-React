@@ -1,29 +1,19 @@
 import PropTypes from "prop-types";
+import { Button, Card } from "react-bootstrap";
 
 export const MovieView = ({ movie, onBackClick }) => {
     return (
-        <div>
-            <div>
-                <img src={movie.imageUrl} alt="" />
-            </div>
-            <div>
-                <span>Title: </span>
-                <span>{movie.title}</span>
-            </div>
-            <div>
-                <span>Description: </span>
-                <span>{movie.description}</span>
-            </div>
-            <div>
-                <span>Genre: </span>
-                <span>{`${movie.genres.name.charAt(0).toUpperCase()}${movie.genres.name.slice(1)}`}</span>
-            </div>
-            <div>
-                <span>Director: </span>
-                <span>{movie.director.name}</span>
-            </div>
-            <button onClick={onBackClick}>Back</button>
-        </div>
+        <Card className="h-100 border-0 mb-3 mt-3 bg-light shadow rounded">
+            <Card.Img variant="top" src={movie.imageUrl} className="imgCard m-auto mb-3 mt-4 shadow rounded" />
+            <Card.Body className="text-center">
+                <Card.Text className="border-top"></Card.Text>
+                <Card.Text><span className="fw-bold">Title:</span> {movie.title}</Card.Text>
+                <Card.Text><span className="fw-bold">Description:</span> {movie.description}</Card.Text>
+                <Card.Text><span className="fw-bold">Genre:</span> {`${movie.genres.name.charAt(0).toUpperCase()}${movie.genres.name.slice(1)}`}</Card.Text>
+                <Card.Text><span className="fw-bold">Director:</span> {movie.director.name}</Card.Text>
+                <Button onClick={onBackClick}>Back</Button>
+            </Card.Body>
+        </Card >
     );
 };
 
