@@ -33,10 +33,10 @@ export const MainView = () => {
                         description: movie.description,
                         genres: { name: movie.genre.name },
                         director: { name: movie.director.name },
-                        imageUrl: movie.imageUrl
+                        imageUrl: movie.imageUrl,
+                        releaseYear: movie.releaseYear
                     };
                 });
-
                 setMovies(moviesFromApi);
             });
     }, [token]);
@@ -44,7 +44,7 @@ export const MainView = () => {
     return (
         <Row className="justify-content-md-center">
             {!user ? (
-                <Col md={5}>
+                <Col md={5} className="welcomeBG">
                     <LoginView onLoggedIn={(user, token) => {
                         setUser(user);
                         setToken(token);
@@ -53,7 +53,7 @@ export const MainView = () => {
                     <SignupView />
                 </Col>
             ) : selectedMovie ? (
-                <Col md={8}>
+                <Col md={12}>
                     <MovieView
                         movie={selectedMovie}
                         onBackClick={() => setSelectedMovie(null)}
@@ -65,7 +65,7 @@ export const MainView = () => {
                 <>
 
                     {movies.map((movie) => (
-                        <Col className="mb-5" key={movie._id} md={3}>
+                        <Col className="mb-5" key={movie._id} xl={4} lg={6} md={6} sm={12} xs={12}>
                             <MovieCard
                                 movie={movie}
                                 onMovieClick={(newSelectedMovie) => {
@@ -75,7 +75,7 @@ export const MainView = () => {
                         </Col>
                     ))}
 
-                    <Button className="mb-3" onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</Button> {/*Will want this to eventually be added to the navigation bar*/}
+                    <Button className="mb-4 col-5 mx-auto logoutButton" onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</Button>
 
                 </>
             )}
