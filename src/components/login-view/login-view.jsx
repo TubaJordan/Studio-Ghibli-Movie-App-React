@@ -41,7 +41,7 @@ export const LoginView = ({ onLoggedIn }) => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Form.Label className="fs-3 fw-semibold text-center mt-3" style={{ width: "100%" }}>Please Login</Form.Label>
+            <Form.Label className="fs-3 fw-semibold text-center mt-3 p-2 loginLabels" style={{ width: "100%" }}>Please Login</Form.Label>
 
             <Form.Group controlId="formUsername">
                 <FloatingLabel
@@ -74,7 +74,7 @@ export const LoginView = ({ onLoggedIn }) => {
                 </FloatingLabel>
             </Form.Group>
 
-            <Button variant="primary mb-3" type="submit">
+            <Button variant="mb-3" className="loginButton" type="submit">
                 Submit
             </Button>
 
