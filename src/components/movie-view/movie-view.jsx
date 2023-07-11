@@ -3,16 +3,18 @@ import { Button, Card } from "react-bootstrap";
 
 export const MovieView = ({ movie, onBackClick }) => {
     return (
-        <Card className="h-100 border-0 mb-3 mt-3 bg-light shadow rounded">
-            <Card.Img variant="top" src={movie.imageUrl} className="imgCard m-auto mb-3 mt-4 shadow rounded" />
-            <Card.Body className="text-center">
-                <Card.Text className="border-top"></Card.Text>
-                <Card.Text><span className="fw-bold">Title:</span> {movie.title}</Card.Text>
-                <Card.Text><span className="fw-bold">Description:</span> {movie.description}</Card.Text>
-                <Card.Text><span className="fw-bold">Genre:</span> {`${movie.genres.name.charAt(0).toUpperCase()}${movie.genres.name.slice(1)}`}</Card.Text>
-                <Card.Text><span className="fw-bold">Director:</span> {movie.director.name}</Card.Text>
-                <Button onClick={onBackClick}>Back</Button>
-            </Card.Body>
+        <Card className="mb-3 mt-3 cardView">
+            <Card.Img src={movie.imageUrl} className="imgCard" />
+            <Card.ImgOverlay>
+                <Card.Body className="text-left">
+                    <Card.Text className="viewTitle text-center">{movie.title}</Card.Text>
+                    <Card.Text><span className="fw-bold">Description:</span> {movie.description}</Card.Text>
+                    <Card.Text><span className="fw-bold">Genre:</span> {`${movie.genres.name.charAt(0).toUpperCase()}${movie.genres.name.slice(1)}`}</Card.Text>
+                    <Card.Text><span className="fw-bold">Director:</span> {movie.director.name}</Card.Text>
+                    <Card.Text><span className="fw-bold">Release Year:</span> {movie.releaseYear}</Card.Text>
+                    <Button className="backButton" onClick={onBackClick}><span>&#11119;</span> Back</Button>
+                </Card.Body>
+            </Card.ImgOverlay>
         </Card >
     );
 };
