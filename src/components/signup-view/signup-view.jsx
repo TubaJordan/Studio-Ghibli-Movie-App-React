@@ -39,7 +39,7 @@ export const SignupView = () => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Form.Label className="fs-3 fw-semibold mt-3 text-center" style={{ width: "100%" }}>Register A New Account</Form.Label>
+            <Form.Label className="fs-3 fw-semibold mt-3 p-2 text-center loginLabels" style={{ width: "100%" }}>Register A New Account</Form.Label>
 
             <Form.Group controlId="signupUsername">
                 <FloatingLabel
@@ -88,7 +88,6 @@ export const SignupView = () => {
             </Form.Group>
 
             <Form.Group controlId="signupEmail">
-                {/* <Form.Label>Birthday:</Form.Label> */}
                 <FloatingLabel
                     controlId="signupEmail"
                     label="Birthday"
@@ -103,7 +102,7 @@ export const SignupView = () => {
                 </FloatingLabel>
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button className="mb-3 loginButton" type="submit">
                 Submit
             </Button>
 
