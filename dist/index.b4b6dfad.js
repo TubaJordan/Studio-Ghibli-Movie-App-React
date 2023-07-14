@@ -46892,26 +46892,27 @@ const MovieView = ({ movie })=>{
         lineNumber: 13,
         columnNumber: 9
     }, undefined);
-}; // MovieView.propTypes = {
- //     movie: PropTypes.shape({
- //         _id: PropTypes.string.isRequired,
- //         title: PropTypes.string.isRequired,
- //         imageUrl: PropTypes.string.isRequired,
- //         director: PropTypes.shape({
- //             name: PropTypes.string.isRequired
- //         }).isRequired,
- //         description: PropTypes.string.isRequired,
- //         genres: PropTypes.shape({
- //             name: PropTypes.string.isRequired
- //         }).isRequired
- //     }).isRequired
- // };
+};
 _s(MovieView, "e2L2DPdRH1AShA7yIOCsYRlzvlI=", false, function() {
     return [
         (0, _reactRouter.useParams)
     ];
 });
 _c = MovieView;
+MovieView.propTypes = {
+    movie: (0, _propTypesDefault.default).shape({
+        _id: (0, _propTypesDefault.default).string.isRequired,
+        title: (0, _propTypesDefault.default).string.isRequired,
+        imageUrl: (0, _propTypesDefault.default).string.isRequired,
+        director: (0, _propTypesDefault.default).shape({
+            name: (0, _propTypesDefault.default).string.isRequired
+        }).isRequired,
+        description: (0, _propTypesDefault.default).string.isRequired,
+        genres: (0, _propTypesDefault.default).shape({
+            name: (0, _propTypesDefault.default).string.isRequired
+        }).isRequired
+    }).isRequired
+};
 var _c;
 $RefreshReg$(_c, "MovieView");
 
