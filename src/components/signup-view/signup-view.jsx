@@ -87,9 +87,9 @@ export const SignupView = () => {
                 </FloatingLabel>
             </Form.Group>
 
-            <Form.Group controlId="signupEmail">
+            <Form.Group controlId="signupBirthday">
                 <FloatingLabel
-                    controlId="signupEmail"
+                    controlId="signupBirthday"
                     label="Birthday"
                     className="mb-3"
                 >
