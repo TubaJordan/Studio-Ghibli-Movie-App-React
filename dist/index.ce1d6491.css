@@ -13310,4 +13310,20 @@ textarea.form-control-lg {
   border-radius: 1px;
 }
 
+.links {
+  text-decoration: none;
+}
+
+.navBar {
+  background-color: #ece9e0;
+  border: 4px solid #2e2e2e;
+  border-radius: 1px;
+  margin-bottom: 20px;
+  box-shadow: 5px 5px 10px #2e2e2ebf;
+}
+
+.logoImage {
+  max-width: 100px;
+}
+
 /*# sourceMappingURL=index.ce1d6491.css.map */
