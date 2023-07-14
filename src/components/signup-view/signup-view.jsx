@@ -1,5 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { FloatingLabel } from "react-bootstrap";
 
 export const SignupView = () => {
 
@@ -35,46 +38,75 @@ export const SignupView = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Username:
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                    pattern="[A-Za-z0-9]+" //for alphanumeric matching
-                    minLength={5}
-                />
-            </label>
-            <label>
-                Password:
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Email:
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Birthday:
-                <input
-                    type="date"
-                    value={birthDate}
-                    onChange={(e) => setBirthDate(e.target.value)}
-                    required
-                />
-            </label>
-            <button type="submit">Submit</button>
-        </form>
+        <Form onSubmit={handleSubmit}>
+            <Form.Label className="fs-3 fw-semibold mt-3 p-2 text-center loginLabels" style={{ width: "100%" }}>Register A New Account</Form.Label>
+
+            <Form.Group controlId="signupUsername">
+                <FloatingLabel
+                    controlId="signupUsername"
+                    label="Username"
+                    className="mb-3"
+                >
+                    <Form.Control
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                        minLength={3}
+                    />
+                </FloatingLabel>
+            </Form.Group>
+
+            <Form.Group controlId="signupPassword">
+                <FloatingLabel
+                    controlId="signupPassword"
+                    label="Password"
+                    className="mb-3"
+                >
+                    <Form.Control
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </FloatingLabel>
+            </Form.Group>
+
+            <Form.Group controlId="signupEmail">
+                <FloatingLabel
+                    controlId="signupEmail"
+                    label="Email"
+                    className="mb-3"
+                >
+                    <Form.Control
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </FloatingLabel>
+            </Form.Group>
+
+            <Form.Group controlId="signupEmail">
+                <FloatingLabel
+                    controlId="signupEmail"
+                    label="Birthday"
+                    className="mb-3"
+                >
+                    <Form.Control
+                        type="date"
+                        value={birthDate}
+                        onChange={(e) => setBirthDate(e.target.value)}
+                        required
+                    />
+                </FloatingLabel>
+            </Form.Group>
+
+            <Button className="mb-3 loginButton" type="submit">
+                Submit
+            </Button>
+
+        </Form>
+
     );
 };

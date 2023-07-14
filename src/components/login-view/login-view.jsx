@@ -1,5 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import { FloatingLabel } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState("");
@@ -37,26 +40,45 @@ export const LoginView = ({ onLoggedIn }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Username:
-                <input
-                    input="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Password:
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </label>
-            <button type="submit">Submit</button>
-        </form>
+        <Form onSubmit={handleSubmit}>
+            <Form.Label className="fs-3 fw-semibold text-center mt-3 p-2 loginLabels" style={{ width: "100%" }}>Please Login</Form.Label>
+
+            <Form.Group controlId="formUsername">
+                <FloatingLabel
+                    controlId="formUsername"
+                    label="Username"
+                    className="mb-3"
+                >
+                    <Form.Control
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                        minLength={3}
+                    />
+                </FloatingLabel>
+            </Form.Group>
+
+            <Form.Group controlId="formPassword">
+                <FloatingLabel
+                    controlId="formPassword"
+                    label="Password"
+                    className="mb-3"
+                >
+                    <Form.Control
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </FloatingLabel>
+            </Form.Group>
+
+            <Button variant="mb-3" className="loginButton" type="submit">
+                Submit
+            </Button>
+
+        </Form>
+
     );
 };
