@@ -13326,4 +13326,8 @@ textarea.form-control-lg {
   max-width: 100px;
 }
 
+.smallCard {
+  scale: 50%;
+}
+
 /*# sourceMappingURL=index.ce1d6491.css.map */

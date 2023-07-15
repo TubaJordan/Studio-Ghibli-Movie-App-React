@@ -4,10 +4,13 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { ProfileView } from "../profile-view/profile-view";
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
+import { useParams } from "react-router";
+
 
 export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -42,12 +45,48 @@ export const MainView = () => {
             });
     }, [token]);
 
+
+    const handleAddToFavorites = (id) => {
+        console.log("Movies:", movies); //prodcues movies in an array, I think
+        console.log("Selected ID:", id);
+        console.log(movies[0]._id)
+
+
+        const movie = movies.find((m) => m._id === id)
+        console.log(movie);
+
+        fetch(`https://moviesapi-4d4b61d9048f.herokuapp.com/users/${user.username}/movies/${movies[0]._id}`, { //I know this needs to not be this, this was used for testing to see if it would work, and it does
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token} `
+            }
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    throw new Error("Error adding movie to favorties");
+                }
+            })
+            .then((updatedUser) => {
+                console.log("User information updated:", updatedUser);
+                setUser(updatedUser);
+            })
+            .catch((error) => {
+                console.log("Error updating user information", error);
+            });
+    };
+
+
     return (
         <BrowserRouter>
             <NavigationBar
                 user={user}
                 onLoggedOut={() => {
                     setUser(null);
+                    setToken(null);
+                    localStorage.clear();
                 }}
             />
             <Row className="justify-content-md-center">
@@ -89,6 +128,34 @@ export const MainView = () => {
                     />
 
                     <Route
+                        path="/profile"
+                        element={
+                            <>
+                                {!user ? (
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    <Col>
+                                        <ProfileView
+                                            user={user}
+                                            token={token}
+                                            setUser={setUser}
+                                            movies={movies}
+                                            onLoggedOut={() => {
+                                                setUser(null);
+                                                setToken(null);
+                                                localStorage.clear();
+                                            }}
+                                        />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+
+
+
+
+                    <Route
                         path="/movies/:movieId"
                         element={
                             <>
@@ -99,7 +166,8 @@ export const MainView = () => {
                                 ) : (
                                     <Col md={12}>
                                         <MovieView
-                                            movie={movies}
+                                            movies={movies}
+                                            onAddToFavorites={handleAddToFavorites}
                                         />
                                     </Col>
                                 )}
