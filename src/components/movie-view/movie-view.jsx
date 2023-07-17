@@ -5,14 +5,31 @@ import { Button, Card } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { ProfileView } from "../profile-view/profile-view";
 
-export const MovieView = ({ movies, onAddToFavorites }) => {
-    const handleAddToFavorites = () => {
-        onAddToFavorites(movies._id);
+export const MovieView = ({ movies, favorites, onAddToFavorites, onRemoveFromFavorites }) => {
+
+    const [isInFavorites, setIsInFavorites] = useState(false);
+
+    const handleAddToFavorites = (id) => {
+        console.log("movie id", id)
+        onAddToFavorites(id);
+        setIsInFavorites(true);
+    }
+
+    const handleRemoveFromFavorites = (id) => {
+        console.log("removed correctly", id);
+        onRemoveFromFavorites(id);
+        setIsInFavorites(false);
     }
 
     const { movieId } = useParams();
 
-    const movie = movies.find((m) => m._id === movieId)
+    const movie = movies.find((m) => m._id === movieId);
+
+    useEffect(() => {
+        if (favorites && Array.isArray(favorites)) {
+            setIsInFavorites(favorites.includes(movieId));
+        }
+    }, [favorites, movieId]);
 
     return (
         <Card className="mb-3 mt-3 cardView">
@@ -27,7 +44,13 @@ export const MovieView = ({ movies, onAddToFavorites }) => {
                     <Link to={"/"}>
                         <Button className="backButton"><span>&#11119;</span> Back</Button>
                     </Link>
-                    <Button onClick={handleAddToFavorites}>FAV</Button>
+
+                    {!isInFavorites ? (
+                        <Button onClick={() => handleAddToFavorites(movie._id)}>FAV</Button>
+                    ) : (
+                        <Button onClick={() => handleRemoveFromFavorites(movie._id)}>Remove from FAV</Button>
+                    )}
+
                 </Card.Body>
             </Card.ImgOverlay>
         </Card >
@@ -35,7 +58,7 @@ export const MovieView = ({ movies, onAddToFavorites }) => {
 };
 
 MovieView.propTypes = {
-    movies: PropTypes.shape({
+    movie: PropTypes.shape({
         _id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         imageUrl: PropTypes.string.isRequired,
@@ -47,5 +70,6 @@ MovieView.propTypes = {
             name: PropTypes.string.isRequired
         }).isRequired
     }).isRequired,
-    onAddToFavorites: PropTypes.func.isRequired
+    onAddToFavorites: PropTypes.func.isRequired,
+    onRemoveFromFavorites: PropTypes.func.isRequired
 };

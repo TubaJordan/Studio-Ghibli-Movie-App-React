@@ -1,7 +1,23 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button"
+import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom"
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = ({ user, onLoggedOut, onSearch, searchQuery }) => {
+
+    const location = useLocation();
+
+    const isMovieOrProfileView = (id) => {
+
+        console.log(id)
+        return (
+            location.pathname === `/movies/${id}` || location.pathname === "/profile"
+        );
+    };
+
     return (
         <Navbar expand="lg" className="navBar">
             <Container>
@@ -30,6 +46,24 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                                     Profile
                                 </Nav.Link>
                                 <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+
+                                {!isMovieOrProfileView() && (
+                                    <Form className="d-flex">
+                                        <Form.Control
+                                            type="search"
+                                            placeholder="Search"
+                                            className="me-2"
+                                            aria-label="Search"
+                                            value={searchQuery}
+                                            onChange={(e) => {
+                                                console.log("Search query:", e.target.value);
+                                                onSearch(e.target.value)
+                                            }}
+                                        />
+                                    </Form>
+                                )}
+
+
                             </>
                         )}
                     </Nav>

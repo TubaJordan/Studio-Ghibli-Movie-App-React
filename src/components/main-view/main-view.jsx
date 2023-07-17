@@ -18,6 +18,9 @@ export const MainView = () => {
     const [movies, setMovies] = useState([]);
     const [user, setUser] = useState(storedUser ? storedUser : null);
     const [token, setToken] = useState(storedToken ? storedToken : null);
+    const [filteredMovies, setFilteredMovies] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
+    const { movieId } = useParams();
 
     useEffect(() => {
 
@@ -42,20 +45,26 @@ export const MainView = () => {
                     };
                 });
                 setMovies(moviesFromApi);
+                setFilteredMovies(moviesFromApi)
             });
     }, [token]);
 
+    useEffect(() => {
+        if (searchQuery.trim() === "") {
+            setFilteredMovies(movies);
+        } else {
+            const filtered = movies.filter((movie) => movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+            setFilteredMovies(filtered);
+        }
+    }, [searchQuery, movies])
+
 
     const handleAddToFavorites = (id) => {
-        console.log("Movies:", movies); //prodcues movies in an array, I think
-        console.log("Selected ID:", id);
-        console.log(movies[0]._id)
-
 
         const movie = movies.find((m) => m._id === id)
-        console.log(movie);
 
-        fetch(`https://moviesapi-4d4b61d9048f.herokuapp.com/users/${user.username}/movies/${movies[0]._id}`, { //I know this needs to not be this, this was used for testing to see if it would work, and it does
+        fetch(`https://moviesapi-4d4b61d9048f.herokuapp.com/users/${user.username}/movies/${id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -74,10 +83,43 @@ export const MainView = () => {
                 setUser(updatedUser);
             })
             .catch((error) => {
-                console.log("Error updating user information", error);
+                console.log("Error updating user information ", error);
             });
     };
 
+    const handleRemoveFromFavorites = (id) => {
+
+        fetch(`https://moviesapi-4d4b61d9048f.herokuapp.com/users/${user.username}/movies/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                }
+            })
+            .then((data) => {
+                localStorage.setItem("user", JSON.stringify(data));
+                setUser(data);
+            })
+            .catch((error) => {
+                console.log("Error removing from favorites ", error)
+            })
+
+    };
+
+    const isMovieOrProfileView = (id) => {
+
+        const movie = movies.find((m) => m._id === id)
+
+        console.log(id)
+        return (
+            location.pathname === `/movies/${id}` || location.pathname === "/profile"
+        );
+    };
 
     return (
         <BrowserRouter>
@@ -88,6 +130,8 @@ export const MainView = () => {
                     setToken(null);
                     localStorage.clear();
                 }}
+                onSearch={setSearchQuery}
+
             />
             <Row className="justify-content-md-center">
                 <Routes>
@@ -140,6 +184,7 @@ export const MainView = () => {
                                             token={token}
                                             setUser={setUser}
                                             movies={movies}
+                                            favorites={user.favoriteMovies}
                                             onLoggedOut={() => {
                                                 setUser(null);
                                                 setToken(null);
@@ -167,7 +212,9 @@ export const MainView = () => {
                                     <Col md={12}>
                                         <MovieView
                                             movies={movies}
+                                            favorites={user.favoriteMovies}
                                             onAddToFavorites={handleAddToFavorites}
+                                            onRemoveFromFavorites={handleRemoveFromFavorites}
                                         />
                                     </Col>
                                 )}
@@ -181,13 +228,18 @@ export const MainView = () => {
                             <>
                                 {!user ? (
                                     <Navigate to="login" replace />
-                                ) : movies.length === 0 ? (
+                                ) : filteredMovies.length === 0 ? (
                                     <Col>This list is empty!</Col>
                                 ) : (
                                     <>
-                                        {movies.map((movie) => (
+                                        {filteredMovies.map((movie) => (
                                             < Col className="mb-5" key={movie._id} xl={4} lg={6} md={6} sm={12} xs={12} >
-                                                <MovieCard movie={movie} />
+                                                <MovieCard
+                                                    movie={movie}
+                                                    favorites={user.favoriteMovies}
+                                                    onAddToFavorites={handleAddToFavorites}
+                                                    onRemoveFromFavorites={handleRemoveFromFavorites}
+                                                />
                                             </Col>
                                         ))}
                                     </>
