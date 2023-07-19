@@ -74,7 +74,7 @@ export const LoginView = ({ onLoggedIn }) => {
                 </FloatingLabel>
             </Form.Group>
 
-            <Button variant="mb-3" className="loginButton" type="submit">
+            <Button className="loginButton mb-3" type="submit">
                 Submit
             </Button>
 
