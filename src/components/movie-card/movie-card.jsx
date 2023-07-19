@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 export const MovieCard = ({ movie }) => {
 
     return (
+
         <Link to={`/movies/${encodeURIComponent(movie._id)}`} className="links">
             <Card className="h-100 custom-card p-3 movieCard" >
                 <Card.Text className="mt-1 cardTop"></Card.Text>
