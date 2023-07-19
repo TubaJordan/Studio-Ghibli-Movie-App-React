@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Modal from "react-bootstrap/Modal";
 import { MovieCard } from "../movie-card/movie-card";
+import { FloatingLabel, ModalTitle } from "react-bootstrap";
+
 
 export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
     const [username, setUsername] = useState(user.username);
@@ -66,73 +68,112 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
             });
     };
 
+
+    const getMonthInWords = (monthNumber) => {
+        const months = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        return months[monthNumber - 1] || "";
+    };
+    const getDayInWords = (dayNumber) => {
+        if (dayNumber < 1 || dayNumber > 31) return "";
+        const suffixes = ["st", "nd", "rd"];
+        const day = dayNumber <= 20 ? dayNumber : dayNumber % 10;
+        return day + (suffixes[day - 1] || "th");
+    }
+    const newDate = new Date(user.birthDate);
+    const formattedDate = `${getMonthInWords(newDate.getUTCMonth() + 1)} ${getDayInWords(newDate.getUTCDate())}, ${newDate.getUTCFullYear()}`;
+
+
     return (
         <>
-            <h1>Profile</h1>
-            <Row>
-                <Col>
-                    <h3>Your profile details</h3>
-                    <div>Username: {user.username}</div>
-                    <div>Email: {user.email}</div>
-                    <div>Birthday: {user.birthDate}</div>
+            <h1 className="text-center fancyText mb-3 profileBanner">Profile</h1>
+            <Row className="profileWrap">
+                <Col className="profileDetails">
+                    <h3 className="mt-3 pt-3 pb-3 fancyText profileBorders text-center">Your profile details</h3>
+                    <div className="detailsText mt-3"><span className="fw-bold">&#129497; Username:</span> {user.username}</div>
+                    <div className="detailsText pt-3"><span className="fw-bold">&#128221; Email:</span> {user.email}</div>
+                    <div className="detailsText pt-3"><span className="fw-bold">&#128197; Birthday:</span> {formattedDate}</div>
+                    <Button onClick={handleShowModal} className="deleteButton mt-3">
+                        Delete my account
+                    </Button>
                 </Col>
-                <Col>
-                    <h3>Update your profile information here</h3>
+                <Col className="updateProfile">
+                    <h3 className="mt-3 mb-3 pt-3 pb-3 fancyText profileBorders text-center">Update your information</h3>
                     <Form onSubmit={handleSubmit}>
 
-                        <Form.Group controlId="formUsername">
-                            <Form.Label>Username:</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                required
-                                minLength={5}
-                            />
+                        <Form.Group controlId="updateUsername">
+                            <FloatingLabel
+                                controlId="updateUsername"
+                                label="Username"
+                                className="mb-3"
+                            >
+                                <Form.Control
+                                    type="text"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    required
+                                    minLength={5}
+                                />
+                            </FloatingLabel>
                         </Form.Group>
 
-                        <Form.Group controlId="formPassword">
-                            <Form.Label>Password:</Form.Label>
-                            <Form.Control
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
+                        <Form.Group controlId="updatePassword">
+                            <FloatingLabel
+                                controlId="updatePassword"
+                                label="Password"
+                                className="mb-3"
+                            >
+                                <Form.Control
+                                    type="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                            </FloatingLabel>
                         </Form.Group>
 
-                        <Form.Group controlId="formEmail">
-                            <Form.Label>Email:</Form.Label>
-                            <Form.Control
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
+                        <Form.Group controlId="updateEmail">
+                            <FloatingLabel
+                                controlId="updateEmail"
+                                label="Email"
+                                className="mb-3"
+                            >
+                                <Form.Control
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </FloatingLabel>
                         </Form.Group>
 
-                        <Form.Group controlId="formBirthday">
-                            <Form.Label>Birthday:</Form.Label>
-                            <Form.Control
-                                type="date"
-                                value={birthDate}
-                                onChange={(e) => setBirthDate(e.target.value)}
-                                required
-                            />
+                        <Form.Group controlId="updateBirthday">
+                            <FloatingLabel
+                                controlId="updateBirthday"
+                                label="Birthday"
+                                className="mb-3"
+                            >
+                                <Form.Control
+                                    type="date"
+                                    value={birthDate}
+                                    onChange={(e) => setBirthDate(e.target.value)}
+                                    required
+                                />
+                            </FloatingLabel>
                         </Form.Group>
 
-                        <Button variant="primary" type="submit">Save changes</Button>
+                        <Button className="mb-3 saveButton" type="submit">Save changes</Button>
 
                     </Form>
                 </Col>
             </Row>
 
-            <Button variant="primary" onClick={handleShowModal}>
-                Delete my account
-            </Button>
 
-            <Row>
-                <h3>Favorite Movies:</h3>
+
+            <Row className="cardContainer">
+                <h3 className="mt-5 mb-3 fancyText text-center favMovies">Favorite Movies</h3>
                 {favoriteMovies.map((movie) => (
                     <Col className="mb-5 smallCard" key={movie._id} md={4}>
                         <MovieCard movie={movie}></MovieCard>
@@ -141,15 +182,19 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
             </Row>
 
 
-            <Modal show={showModal} onHide={handleCloseModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Delete Account</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Are you sure you want to delete?</Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={handleDeleteUser}>Yes</Button>
-                    <Button onClick={handleCloseModal}>No</Button>
-                </Modal.Footer>
+            <Modal show={showModal} onHide={handleCloseModal} className="modalContainer">
+                <div className="modalBorder">
+                    <Modal.Header closeButton className="modalHead">
+                        <Modal.Title className="modalTitle pt-2 pb-2">Delete Account</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body className="modalMiddle mb-3">Are you sure you want to delete?</Modal.Body>
+
+                    <Modal.Footer className="modalFooter">
+                        <Button onClick={handleDeleteUser} className="modalButton">Yes</Button>
+                        <Button onClick={handleCloseModal} className="modalButton">No</Button>
+                    </Modal.Footer>
+                </div>
             </Modal>
         </>
     );
