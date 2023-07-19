@@ -5,14 +5,17 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
+
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import { useParams } from "react-router";
+import { ButtonGroup, DropdownButton, Dropdown } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
 
 
-export const MainView = () => {
+export const MainView = ({ location }) => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
     const [movies, setMovies] = useState([]);
@@ -21,6 +24,52 @@ export const MainView = () => {
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const { movieId } = useParams();
+
+    const sortMoviesByTitle = (movies) => { return movies.slice().sort((a, b) => a.title.localeCompare(b.title)) };
+    const sortMoviesByTitleReverse = (movies) => { return movies.slice().sort((b, a) => a.title.localeCompare(b.title)) };
+    const sortMoviesByYear = (movies) => { return movies.slice().sort((a, b) => a.releaseYear.localeCompare(b.releaseYear)) };
+    const sortMoviesByYearReverse = (movies) => { return movies.slice().sort((b, a) => a.releaseYear.localeCompare(b.releaseYear)) };
+    const sortMoviesByGenre = (movies) => { return movies.slice().sort((a, b) => a.title.localeCompare(b.title)).sort((a, b) => a.genres.name.localeCompare(b.genres.name)) };
+
+    const sortOptions = [
+        { label: "Title (A-Z)", value: "titleAsc", sortFn: sortMoviesByTitle },
+        { label: "Title (Z-A)", value: "titleDesc", sortFn: sortMoviesByTitleReverse },
+        { label: "Release Year (Oldest First)", value: "yearAsc", sortFn: sortMoviesByYear },
+        { label: "Release Year (Newest First)", value: "yearDesc", sortFn: sortMoviesByYearReverse },
+        { label: "Genre", value: "genre", sortFn: sortMoviesByGenre }
+    ];
+
+    const [currentSortOption, setCurrentSortOption] = useState("titleAsc");
+    const handleSortOptionSelect = (optionValue) => {
+        setCurrentSortOption(optionValue);
+    }
+
+
+    useEffect(() => {
+        if (movies.length > 0) {
+            const sortOption = sortOptions.find(option => option.value === currentSortOption);
+            if (sortOptions && sortOptions.sortFn) {
+                const sortedMovies = sortOptions.sortFn(movies);
+                setFilteredMovies(sortedMovies);
+            }
+        }
+    }, [movies, currentSortOption])
+
+
+    useEffect(() => {
+        const sortOption = sortOptions.find(option => option.value === currentSortOption);
+        if (movies.length > 0 && sortOption && sortOption.sortFn) {
+            if (searchQuery.trim() === "") {
+                setFilteredMovies(sortOption.sortFn(movies));
+            } else {
+                const filtered = movies.filter((movie) => movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+                const sortedFilter = sortOption.sortFn(filtered);
+                setFilteredMovies(sortedFilter);
+            }
+        }
+    }, [searchQuery, movies, currentSortOption]);
+
 
     useEffect(() => {
 
@@ -49,16 +98,6 @@ export const MainView = () => {
             });
     }, [token]);
 
-    useEffect(() => {
-        if (searchQuery.trim() === "") {
-            setFilteredMovies(movies);
-        } else {
-            const filtered = movies.filter((movie) => movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-            );
-            setFilteredMovies(filtered);
-        }
-    }, [searchQuery, movies])
-
 
     const handleAddToFavorites = (id) => {
 
@@ -79,13 +118,13 @@ export const MainView = () => {
                 }
             })
             .then((updatedUser) => {
-                console.log("User information updated:", updatedUser);
                 setUser(updatedUser);
             })
             .catch((error) => {
                 console.log("Error updating user information ", error);
             });
     };
+
 
     const handleRemoveFromFavorites = (id) => {
 
@@ -111,28 +150,25 @@ export const MainView = () => {
 
     };
 
-    const isMovieOrProfileView = (id) => {
-
-        const movie = movies.find((m) => m._id === id)
-
-        console.log(id)
-        return (
-            location.pathname === `/movies/${id}` || location.pathname === "/profile"
-        );
-    };
 
     return (
         <BrowserRouter>
+
             <NavigationBar
                 user={user}
+                movies={movies}
                 onLoggedOut={() => {
                     setUser(null);
                     setToken(null);
                     localStorage.clear();
                 }}
                 onSearch={setSearchQuery}
-
+                handleSortOptionSelect={handleSortOptionSelect}
+                searchQuery={searchQuery}
+                sortOptions={sortOptions}
+                currentSortOption={currentSortOption}
             />
+
             <Row className="justify-content-md-center">
                 <Routes>
 
