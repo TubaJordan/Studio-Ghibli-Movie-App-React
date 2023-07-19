@@ -1,20 +1,19 @@
-import { Navbar, Container, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Navbar, Container, Nav, Dropdown, DropdownButton } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button"
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom"
+import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 
-export const NavigationBar = ({ user, onLoggedOut, onSearch, searchQuery }) => {
+export const NavigationBar = ({ user, onLoggedOut, onSearch, searchQuery, handleSortOptionSelect, sortOptions, currentSortOption }) => {
 
     const location = useLocation();
 
-    const isMovieOrProfileView = (id) => {
-
-        console.log(id)
+    const isMovieOrProfileView = () => {
         return (
-            location.pathname === `/movies/${id}` || location.pathname === "/profile"
+            location.pathname.includes("/movies/") || location.pathname === "/profile"
         );
     };
 
@@ -52,17 +51,39 @@ export const NavigationBar = ({ user, onLoggedOut, onSearch, searchQuery }) => {
                                         <Form.Control
                                             type="search"
                                             placeholder="Search"
-                                            className="me-2"
+                                            className="me-2 mt-1 mb-1"
                                             aria-label="Search"
                                             value={searchQuery}
                                             onChange={(e) => {
-                                                console.log("Search query:", e.target.value);
                                                 onSearch(e.target.value)
                                             }}
                                         />
                                     </Form>
                                 )}
 
+                                {!isMovieOrProfileView() && (
+
+                                    <DropdownButton
+                                        title="Sort By"
+                                        onSelect={handleSortOptionSelect}
+                                        className="sortButton mt-1 mb-1"
+                                        align={"end"}
+                                    >
+
+                                        {sortOptions.map((option) => (
+                                            <Dropdown.Item
+                                                key={option.value}
+                                                eventKey={option.value}
+                                                active={currentSortOption === option.value}
+                                                className="sortItems mt-1"
+                                            >
+                                                {option.label}
+                                            </Dropdown.Item>
+                                        ))}
+
+                                    </DropdownButton>
+
+                                )}
 
                             </>
                         )}
