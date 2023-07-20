@@ -61,18 +61,19 @@ export const MovieView = ({ movies, favorites, onAddToFavorites, onRemoveFromFav
 };
 
 MovieView.propTypes = {
-    movies: PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        imageUrl: PropTypes.string.isRequired,
-        director: PropTypes.shape({
-            name: PropTypes.string.isRequired
-        }).isRequired,
-        description: PropTypes.string.isRequired,
-        genres: PropTypes.shape({
-            name: PropTypes.string.isRequired
-        }).isRequired
-    }).isRequired,
+    movies: PropTypes.arrayOf(
+        PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            imageUrl: PropTypes.string.isRequired,
+            director: PropTypes.shape({
+                name: PropTypes.string.isRequired
+            }).isRequired,
+            description: PropTypes.string.isRequired,
+            genres: PropTypes.shape({
+                name: PropTypes.string.isRequired
+            }).isRequired
+        })).isRequired,
     onAddToFavorites: PropTypes.func.isRequired,
     onRemoveFromFavorites: PropTypes.func.isRequired
 };
