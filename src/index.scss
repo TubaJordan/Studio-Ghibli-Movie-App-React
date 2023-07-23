@@ -4,6 +4,8 @@ $input-focus-border-color: rgba(46, 46, 46, 0.5);
 $input-focus-color: rgba(46, 46, 46, 1);
 $input-focus-box-shadow: rgba(46, 46, 46, 0.75);
 
+$primary: rgba(107, 104, 92, 0.829);
+
 @import "~bootstrap/scss/bootstrap.scss";
 
 .movieCard {
@@ -131,4 +133,282 @@ $input-focus-box-shadow: rgba(46, 46, 46, 0.75);
 .form-control {
     border-radius: 1px;
     border: 2px solid rgb(46, 46, 46);
+}
+
+.links {
+    text-decoration: none;
+}
+
+.navBar {
+    margin-bottom: 20px;
+    border-radius: 1px;
+    border: 4px solid rgb(46, 46, 46);
+    background-color: rgb(236, 233, 224);
+    box-shadow: 5px 5px 10px rgba(46, 46, 46, 0.75);
+}
+
+.logoImage {
+    max-width: 100px;
+}
+
+.dropdown-toggle {
+    background-color: rgb(199, 196, 186) !important;
+    border: 2px solid rgb(46, 46, 46) !important;
+    border-radius: 1px !important;
+    color: rgb(46, 46, 46) !important;
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus,
+.dropdown-toggle:active {
+    background-color: rgba(107, 104, 92, 0.829) !important;
+    border: 2px solid rgb(46, 46, 46) !important;
+    color: rgb(46, 46, 46) !important;
+}
+
+.dropdown-item {
+    background-color: rgb(199, 196, 186);
+}
+
+.dropdown-item:active {
+    color: rgb(199, 196, 186) !important;
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+    background-color: rgba(145, 141, 124, 0.829) !important;
+}
+
+.favButtonAdd {
+    position: absolute;
+    top: 35;
+    right: 25;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-size: 50px;
+    color: rgba(238, 238, 238, 0.75);
+    transition: ease-out 0.5s;
+}
+
+.favButtonRemove {
+    position: absolute;
+    top: 35;
+    right: 25;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-size: 50px;
+    color: rgb(199, 49, 38);
+    transition: ease-in 0.5s;
+    transform: scale(1.2);
+}
+
+.profileDetails {
+    border-top: 4px solid rgb(46, 46, 46) !important;
+    border-bottom: 4px solid rgb(46, 46, 46) !important;
+    border-left: 4px solid rgb(46, 46, 46) !important;
+    background-color: rgb(236, 233, 224);
+}
+
+.updateProfile {
+    border-top: 4px solid rgb(46, 46, 46) !important;
+    border-bottom: 4px solid rgb(46, 46, 46) !important;
+    border-right: 4px solid rgb(46, 46, 46) !important;
+    background-color: rgb(236, 233, 224);
+}
+
+.profileWrap {
+    box-shadow: 5px 5px 10px rgba(46, 46, 46, 0.75);
+}
+
+.fancyText {
+    font-family: 'Alegreya Sans SC', sans-serif;
+    letter-spacing: 1.5px;
+}
+
+.profileBorders {
+    border-top: 1px solid rgb(46, 46, 46);
+    border-bottom: 1px solid rgb(46, 46, 46);
+}
+
+.detailsText {
+    font-size: 20px;
+}
+
+.modalButton,
+.deleteButton,
+.saveButton {
+    background-color: rgb(199, 196, 186);
+    border: 2px solid rgb(46, 46, 46);
+    border-radius: 1px;
+    color: rgb(46, 46, 46);
+}
+
+
+.modalButton:hover,
+.modalButton:focus,
+.modalButton:active,
+.saveButton:hover,
+.saveButton:focus,
+.saveButton:active,
+.deleteButton:hover,
+.deleteButton:focus,
+.deleteButton:active {
+    background-color: rgba(107, 104, 92, 0.829) !important;
+    border: 2px solid rgb(46, 46, 46) !important;
+    color: rgb(46, 46, 46) !important;
+}
+
+.favMovies {
+    font-size: 40px;
+}
+
+.profileBanner {
+    font-size: 45px;
+}
+
+.modalContainer {
+    background-color: rgba(46, 46, 46, 0.85);
+}
+
+.modalHead {
+    background-color: rgb(236, 233, 224);
+    border-radius: 0;
+    border-bottom: none;
+}
+
+.modalMiddle {
+    border-bottom: none;
+}
+
+.modalFooter {
+    border-top: none;
+}
+
+.modalTitle {
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-size: 35px;
+    letter-spacing: 1.5px;
+    border-top: 1px solid rgb(46, 46, 46);
+    border-bottom: 1px solid rgb(46, 46, 46);
+}
+
+.modalBorder {
+    border: 4px solid rgb(46, 46, 46) !important;
+    box-shadow: 5px 5px 10px rgba(46, 46, 46, 0.75);
+    background-color: rgb(236, 233, 224);
+}
+
+.closeButton {
+    color: red;
+}
+
+.navBarImg {
+    height: 40px;
+    transform: scaleX(-1);
+    margin: none;
+    padding: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(46, 46, 46);
+}
+
+.logoHeader {
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-size: 30px;
+    letter-spacing: 1.5px;
+    margin-left: 12px;
+    padding: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    color: rgb(46, 46, 46);
+    border-bottom: 1px solid rgb(46, 46, 46);
+    border-top: 1px solid rgb(46, 46, 46);
+}
+
+.logoBrand {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navBarItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media all and (max-width: 545px) {
+    .logoHeader {
+        font-size: 0.75em;
+    }
+
+    .navBarItem {
+        justify-content: left;
+    }
+
+    .profileDetails,
+    .updateProfile {
+        margin-left: 12px;
+        margin-right: 12px;
+        border: 4px solid rgb(46, 46, 46);
+        box-shadow: 5px 5px 10px rgba(46, 46, 46, 0.75);
+    }
+
+    .updateProfile {
+        margin-top: 25px;
+    }
+
+    .deleteButton {
+        margin-bottom: 12px;
+    }
+
+    .profileWrap {
+        box-shadow: none;
+    }
+
+    .cardView {
+        font-size: 0.9em;
+    }
+
+    .viewTitle {
+        font-size: 20px;
+    }
+
+    .imgBox {
+        padding-top: 0;
+    }
+
+    .backButton {
+        position: relative;
+        bottom: 25;
+    }
+
+    .favButtonAdd {
+        position: relative;
+        top: 0;
+        left: 35;
+    }
+
+    .favButtonRemove {
+        position: relative;
+        top: 0;
+        left: 35;
+    }
+
+    .detailsText {
+        font-size: 1em;
+    }
+
+}
+
+@media all and (max-width: 1024px) {
+    .navBarItem {
+        justify-content: left;
+    }
 }
