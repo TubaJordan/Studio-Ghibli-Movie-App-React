@@ -133,6 +133,7 @@ $primary: rgba(107, 104, 92, 0.829);
 .form-control {
     border-radius: 1px;
     border: 2px solid rgb(46, 46, 46);
+    padding: 26px 12px 10px;
 }
 
 .links {
@@ -411,8 +412,4 @@ $primary: rgba(107, 104, 92, 0.829);
     .navBarItem {
         justify-content: left;
     }
-}
-
-#formUsername {
-    padding: 26px 16px 12px;
 }
