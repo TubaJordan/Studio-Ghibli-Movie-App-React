@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
+
 export const MovieView = ({ movies, favorites, onAddToFavorites, onRemoveFromFavorites }) => {
 
     const navigate = useNavigate();
@@ -28,10 +29,11 @@ export const MovieView = ({ movies, favorites, onAddToFavorites, onRemoveFromFav
         }
     }, [favorites, movieId]);
 
+
     return (
         <Card className="mb-3 mt-3 cardView">
             <Card.Img src={movie.imageUrl} className="imgCard" />
-            <Card.ImgOverlay>
+            <Card.ImgOverlay className="imgBox">
                 <Card.Body className="text-left">
 
                     <Card.Text className="viewTitle text-center">{movie.title}</Card.Text>
@@ -45,11 +47,11 @@ export const MovieView = ({ movies, favorites, onAddToFavorites, onRemoveFromFav
                     </Button>
 
                     {!isInFavorites ? (
-                        <Link onClick={() => handleAddToFavorites(movie._id)} className="favButtonAdd" title="Add To Favorites">
+                        <Link onClick={() => handleAddToFavorites(movie._id)} className="favButtonAdd" title="Add To Favorites" aria-label="Add To Favorites">
                             &#9825;
                         </Link>
                     ) : (
-                        <Link onClick={() => handleRemoveFromFavorites(movie._id)} className="favButtonRemove" title="Remove From Favorites">
+                        <Link onClick={() => handleRemoveFromFavorites(movie._id)} className="favButtonRemove" title="Remove From Favorites" aria-label="Remove From Favorites">
                             &#9829;
                         </Link>
                     )}
