@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Modal from "react-bootstrap/Modal";
 import { MovieCard } from "../movie-card/movie-card";
-import { FloatingLabel, ModalTitle } from "react-bootstrap";
+import { FloatingLabel } from "react-bootstrap";
 
 
 export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
@@ -21,34 +21,42 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
 
+
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const data = {
-            username: username,
-            password: password,
-            email: email,
-            birthDate: birthDate,
-        };
+        const isFormValid = validateFormUsername() && validateFormPassword() && validateFormEmail() && validateFormBirthDate() && validateFormConfirmPassword();
 
-        fetch(`https://moviesapi-4d4b61d9048f.herokuapp.com/users/${user.username}`, {
-            method: "PUT",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response) => {
-            if (response.ok) {
-                alert("Success, please re-login")
-                onLoggedOut()
-            } else {
-                alert("Update failed.")
-            }
-        });
+        if (isFormValid) {
+            const data = {
+                username: username,
+                password: password,
+                email: email,
+                birthDate: birthDate,
+            };
+
+            //update user info
+            fetch(`https://moviesapi-4d4b61d9048f.herokuapp.com/users/${user.username}`, {
+                method: "PUT",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }).then((response) => {
+                if (response.ok) {
+                    alert("Success, please re-login")
+                    onLoggedOut()
+                } else {
+                    alert("Update failed.")
+                }
+            });
+        }
     };
 
     const handleDeleteUser = () => {
+        //delete user
         fetch(`https://moviesapi-4d4b61d9048f.herokuapp.com/users/${user.username}`, {
             method: "DELETE",
             headers: {
@@ -91,6 +99,9 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
     const [emailValid, setEmailValid] = useState(true);
     const [birthDateValid, setBirthDateValid] = useState(true);
 
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [confirmPasswordValid, setConfirmPasswordValid] = useState(true);
+
     const validateFormUsername = () => {
         const isUsernameValid = username.length >= 5;
         setUsernameValid(isUsernameValid);
@@ -115,6 +126,11 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
         return isBirthDateValid;
     }
 
+    const validateFormConfirmPassword = () => {
+        const isConfirmPasswordValid = confirmPassword === password;
+        setConfirmPasswordValid(isConfirmPasswordValid);
+        return isConfirmPasswordValid;
+    }
 
 
     return (
@@ -123,9 +139,9 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
             <Row className="profileWrap">
                 <Col className="profileDetails">
                     <h3 className="mt-3 pt-3 pb-3 fancyText profileBorders text-center">Your profile details</h3>
-                    <div className="detailsText mt-3"><span className="fw-bold">&#129497; Username:</span> {user.username}</div>
-                    <div className="detailsText pt-3"><span className="fw-bold">&#128221; Email:</span> {user.email}</div>
-                    <div className="detailsText pt-3"><span className="fw-bold">&#128197; Birthday:</span> {formattedDate}</div>
+                    <div className="detailsText mt-3"><span className="fw-bold" role="img" aria-label="Username Icon">&#129497; Username:</span> {user.username}</div>
+                    <div className="detailsText pt-3"><span className="fw-bold" role="img" aria-label="Email Icon">&#128221; Email:</span> {user.email}</div>
+                    <div className="detailsText pt-3"><span className="fw-bold" role="img" aria-label="Birthday Icon">&#128197; Birthday:</span> {formattedDate}</div>
                     <Button onClick={handleShowModal} className="deleteButton mt-3">
                         Delete my account
                     </Button>
@@ -148,6 +164,8 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
                                     isInvalid={!usernameValid}
                                     required
                                     minLength={5}
+                                    aria-label="Username"
+                                    aria-invalid={!usernameValid}
                                 />
                                 <Form.Control.Feedback type="invalid">
                                     Username must be at least 5 characters
@@ -169,9 +187,34 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
                                     onBlur={validateFormPassword}
                                     isInvalid={!passwordValid}
                                     required
+                                    aria-label="Password"
+                                    aria-invalid={!passwordValid}
                                 />
                                 <Form.Control.Feedback type="invalid">
                                     Password must be at least 6 characters
+                                </Form.Control.Feedback>
+
+                            </FloatingLabel>
+                        </Form.Group>
+
+                        <Form.Group controlId="updateConfirmPassword">
+                            <FloatingLabel
+                                controlId="updateConfirmPassword"
+                                label="Confirm Password"
+                                className="mb-3"
+                            >
+                                <Form.Control
+                                    type="password"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    onBlur={validateFormConfirmPassword}
+                                    isInvalid={!confirmPasswordValid}
+                                    required
+                                    aria-label="Confirm Password"
+                                    aria-invalid={!confirmPasswordValid}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    Passwords do not match
                                 </Form.Control.Feedback>
 
                             </FloatingLabel>
@@ -190,6 +233,8 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
                                     onBlur={validateFormEmail}
                                     isInvalid={!emailValid}
                                     required
+                                    aria-label="Email"
+                                    aria-invalid={!emailValid}
                                 />
                                 <Form.Control.Feedback type="invalid">
                                     Enter a valid email address
@@ -211,6 +256,8 @@ export const ProfileView = ({ user, token, movies, onLoggedOut }) => {
                                     onBlur={validateFormBirthDate}
                                     isInvalid={!birthDateValid}
                                     required
+                                    aria-label="Birthday"
+                                    aria-invalid={!birthDateValid}
                                 />
                                 <Form.Control.Feedback type="invalid">
                                     Select your birthday
