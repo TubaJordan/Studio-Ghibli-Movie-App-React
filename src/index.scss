@@ -209,7 +209,6 @@ $primary: rgba(107, 104, 92, 0.829);
     border-bottom: 4px solid rgb(46, 46, 46) !important;
     border-left: 4px solid rgb(46, 46, 46) !important;
     background-color: rgb(236, 233, 224);
-    // box-shadow: 5px 5px 10px rgba(46, 46, 46, 0.75);
 }
 
 .updateProfile {
@@ -217,7 +216,6 @@ $primary: rgba(107, 104, 92, 0.829);
     border-bottom: 4px solid rgb(46, 46, 46) !important;
     border-right: 4px solid rgb(46, 46, 46) !important;
     background-color: rgb(236, 233, 224);
-    // box-shadow: 5px 5px 10px rgba(46, 46, 46, 0.75);
 }
 
 .profileWrap {
@@ -230,8 +228,8 @@ $primary: rgba(107, 104, 92, 0.829);
 }
 
 .profileBorders {
-    border-top: 2px solid rgb(46, 46, 46);
-    border-bottom: 2px solid rgb(46, 46, 46);
+    border-top: 1px solid rgb(46, 46, 46);
+    border-bottom: 1px solid rgb(46, 46, 46);
 }
 
 .detailsText {
@@ -292,8 +290,8 @@ $primary: rgba(107, 104, 92, 0.829);
     font-family: 'Alegreya Sans SC', sans-serif;
     font-size: 35px;
     letter-spacing: 1.5px;
-    border-top: 2px solid rgb(46, 46, 46);
-    border-bottom: 2px solid rgb(46, 46, 46);
+    border-top: 1px solid rgb(46, 46, 46);
+    border-bottom: 1px solid rgb(46, 46, 46);
 }
 
 .modalBorder {
@@ -304,4 +302,113 @@ $primary: rgba(107, 104, 92, 0.829);
 
 .closeButton {
     color: red;
+}
+
+.navBarImg {
+    height: 40px;
+    transform: scaleX(-1);
+    margin: none;
+    padding: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(46, 46, 46);
+}
+
+.logoHeader {
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-size: 30px;
+    letter-spacing: 1.5px;
+    margin-left: 12px;
+    padding: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    color: rgb(46, 46, 46);
+    border-bottom: 1px solid rgb(46, 46, 46);
+    border-top: 1px solid rgb(46, 46, 46);
+}
+
+.logoBrand {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navBarItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media all and (max-width: 545px) {
+    .logoHeader {
+        font-size: 0.75em;
+    }
+
+    .navBarItem {
+        justify-content: left;
+    }
+
+    .profileDetails,
+    .updateProfile {
+        margin-left: 12px;
+        margin-right: 12px;
+        border: 4px solid rgb(46, 46, 46);
+        box-shadow: 5px 5px 10px rgba(46, 46, 46, 0.75);
+    }
+
+    .updateProfile {
+        margin-top: 25px;
+    }
+
+    .deleteButton {
+        margin-bottom: 12px;
+    }
+
+    .profileWrap {
+        box-shadow: none;
+    }
+
+    .cardView {
+        font-size: 0.9em;
+    }
+
+    .viewTitle {
+        font-size: 20px;
+    }
+
+    .imgBox {
+        padding-top: 0;
+    }
+
+    .backButton {
+        position: relative;
+        bottom: 25;
+    }
+
+    .favButtonAdd {
+        position: relative;
+        top: 0;
+        left: 35;
+    }
+
+    .favButtonRemove {
+        position: relative;
+        top: 0;
+        left: 35;
+    }
+
+    .detailsText {
+        font-size: 1em;
+    }
+
+}
+
+@media all and (max-width: 1024px) {
+    .navBarItem {
+        justify-content: left;
+    }
 }
