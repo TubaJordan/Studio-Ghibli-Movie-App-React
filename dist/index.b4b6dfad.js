@@ -48099,7 +48099,7 @@ const ProfileView = ({ user, token, movies, onLoggedOut })=>{
                                         controlId: "updateUsername",
                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.FloatingLabel), {
                                             controlId: "updateUsername",
-                                            label: "",
+                                            label: "Username",
                                             className: "mb-3",
                                             children: [
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
