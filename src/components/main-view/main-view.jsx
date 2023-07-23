@@ -5,17 +5,13 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
-
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
-import Button from "react-bootstrap/Button"
-import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useParams } from "react-router";
-import { ButtonGroup, DropdownButton, Dropdown } from "react-bootstrap";
-import { withRouter } from "react-router-dom";
 
 
-export const MainView = ({ location }) => {
+export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
     const [movies, setMovies] = useState([]);
@@ -269,7 +265,7 @@ export const MainView = ({ location }) => {
                                 ) : (
                                     <>
                                         {filteredMovies.map((movie) => (
-                                            < Col className="mb-5" key={movie._id} xl={4} lg={6} md={6} sm={12} xs={12} >
+                                            < Col className="mb-5" key={movie._id} xl={4} lg={6} md={6} sm={12} xs={12} aria-label={`Movie: ${movie.title}`}>
                                                 <MovieCard
                                                     movie={movie}
                                                     favorites={user.favoriteMovies}
