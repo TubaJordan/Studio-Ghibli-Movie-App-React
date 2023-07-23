@@ -13400,8 +13400,8 @@ textarea.form-control-lg {
 }
 
 .profileBorders {
-  border-top: 2px solid #2e2e2e;
-  border-bottom: 2px solid #2e2e2e;
+  border-top: 1px solid #2e2e2e;
+  border-bottom: 1px solid #2e2e2e;
 }
 
 .detailsText {
@@ -13449,8 +13449,8 @@ textarea.form-control-lg {
 
 .modalTitle {
   letter-spacing: 1.5px;
-  border-top: 2px solid #2e2e2e;
-  border-bottom: 2px solid #2e2e2e;
+  border-top: 1px solid #2e2e2e;
+  border-bottom: 1px solid #2e2e2e;
   font-family: Alegreya Sans SC, sans-serif;
   font-size: 35px;
 }
@@ -13463,6 +13463,104 @@ textarea.form-control-lg {
 
 .closeButton {
   color: red;
+}
+
+.navBarImg {
+  margin: none;
+  padding: none;
+  color: #2e2e2e;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  display: flex;
+  transform: scaleX(-1);
+}
+
+.logoHeader {
+  letter-spacing: 1.5px;
+  color: #2e2e2e;
+  border-top: 1px solid #2e2e2e;
+  border-bottom: 1px solid #2e2e2e;
+  margin: 0 0 0 12px;
+  padding: 0;
+  font-family: Alegreya Sans SC, sans-serif;
+  font-size: 30px;
+}
+
+.logoBrand {
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navBarItem {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+@media (width <= 545px) {
+  .logoHeader {
+    font-size: .75em;
+  }
+
+  .navBarItem {
+    justify-content: left;
+  }
+
+  .profileDetails, .updateProfile {
+    border: 4px solid #2e2e2e;
+    margin-left: 12px;
+    margin-right: 12px;
+    box-shadow: 5px 5px 10px #2e2e2ebf;
+  }
+
+  .updateProfile {
+    margin-top: 25px;
+  }
+
+  .deleteButton {
+    margin-bottom: 12px;
+  }
+
+  .profileWrap {
+    box-shadow: none;
+  }
+
+  .cardView {
+    font-size: .9em;
+  }
+
+  .viewTitle {
+    font-size: 20px;
+  }
+
+  .imgBox {
+    padding-top: 0;
+  }
+
+  .backButton {
+    position: relative;
+    bottom: 25px;
+  }
+
+  .favButtonAdd, .favButtonRemove {
+    position: relative;
+    top: 0;
+    left: 35px;
+  }
+
+  .detailsText {
+    font-size: 1em;
+  }
+}
+
+@media (width <= 1024px) {
+  .navBarItem {
+    justify-content: left;
+  }
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */
