@@ -13501,7 +13501,7 @@ textarea.form-control-lg {
   display: flex;
 }
 
-#formUsername {
+#formUsername, #formPassword, #signupUsername, #signupPassword, #confirmPassword, #signupEmail, #signupBirthday, #updateUsername, #updatePassword, #updateConfirmPassword, #updateEmail, #updateBirthday {
   padding: 26px 12px 10px;
 }
 

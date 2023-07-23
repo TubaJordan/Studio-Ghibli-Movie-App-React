@@ -343,7 +343,18 @@ $primary: rgba(107, 104, 92, 0.829);
     align-items: center;
 }
 
-#formUsername {
+#formUsername,
+#formPassword,
+#signupUsername,
+#signupPassword,
+#confirmPassword,
+#signupEmail,
+#signupBirthday,
+#updateUsername,
+#updatePassword,
+#updateConfirmPassword,
+#updateEmail,
+#updateBirthday {
     padding: 26px 12px 10px;
 }
 
