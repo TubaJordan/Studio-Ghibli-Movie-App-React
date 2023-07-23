@@ -13308,7 +13308,6 @@ textarea.form-control-lg {
 .form-control {
   border: 2px solid #2e2e2e;
   border-radius: 1px;
-  padding: 26px 12px 10px;
 }
 
 .links {
@@ -13500,6 +13499,10 @@ textarea.form-control-lg {
   justify-content: center;
   align-items: center;
   display: flex;
+}
+
+#formUsername {
+  padding: 26px 12px 10px;
 }
 
 @media (width <= 545px) {

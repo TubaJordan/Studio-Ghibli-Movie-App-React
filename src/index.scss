@@ -133,7 +133,6 @@ $primary: rgba(107, 104, 92, 0.829);
 .form-control {
     border-radius: 1px;
     border: 2px solid rgb(46, 46, 46);
-    padding: 26px 12px 10px;
 }
 
 .links {
@@ -342,6 +341,10 @@ $primary: rgba(107, 104, 92, 0.829);
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#formUsername {
+    padding: 26px 12px 10px;
 }
 
 @media all and (max-width: 545px) {
