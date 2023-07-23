@@ -4,6 +4,7 @@ import { FloatingLabel } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -39,6 +40,7 @@ export const LoginView = ({ onLoggedIn }) => {
             });
     };
 
+
     return (
         <Form onSubmit={handleSubmit}>
             <Form.Label className="fs-3 fw-semibold text-center mt-3 p-2 loginLabels" style={{ width: "100%" }}>Please Login</Form.Label>
@@ -48,6 +50,7 @@ export const LoginView = ({ onLoggedIn }) => {
                     controlId="formUsername"
                     label="Username"
                     className="mb-3"
+                    htmlFor="formUsername"
                 >
                     <Form.Control
                         type="text"
