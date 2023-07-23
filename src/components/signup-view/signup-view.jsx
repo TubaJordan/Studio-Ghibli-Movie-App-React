@@ -16,6 +16,9 @@ export const SignupView = () => {
     const [emailValid, setEmailValid] = useState(true);
     const [birthDateValid, setBirthDateValid] = useState(true);
 
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [confirmPasswordValid, setConfirmPasswordValid] = useState(true);
+
     const validateFormUsername = () => {
         const isUsernameValid = username.length >= 5;
         setUsernameValid(isUsernameValid);
@@ -40,42 +43,48 @@ export const SignupView = () => {
         return isBirthDateValid;
     }
 
-
+    const validateFormConfirmPassword = () => {
+        const isConfirmPasswordValid = confirmPassword === password;
+        setConfirmPasswordValid(isConfirmPasswordValid);
+        return isConfirmPasswordValid;
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const data = {
-            username: username,
-            password: password,
-            email: email,
-            birthDate: birthDate
-        };
+        const isFormValid = validateFormUsername() && validateFormPassword() && validateFormEmail() && validateFormBirthDate() && validateFormConfirmPassword();
 
-        fetch("https://moviesapi-4d4b61d9048f.herokuapp.com/users", {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then((response) => {
-            if (response.ok) {
-                alert("Signup successful");
-                window.location.replace("/");
-            } else {
-                alert("Signup failed");
-            }
-        })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
+        if (isFormValid) {
+            const data = {
+                username: username,
+                password: password,
+                email: email,
+                birthDate: birthDate
+            };
 
+            fetch("https://moviesapi-4d4b61d9048f.herokuapp.com/users", {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then((response) => {
+                if (response.ok) {
+                    alert("Signup successful, please login");
+                    window.location.replace("/");
+                } else {
+                    alert("Signup failed");
+                }
+            })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+        }
     };
 
 
-
-
     return (
+
         <Form onSubmit={handleSubmit}>
 
             <Form.Label className="fs-3 fw-semibold mt-3 p-2 text-center loginLabels" style={{ width: "100%" }}>
@@ -97,6 +106,8 @@ export const SignupView = () => {
                         isInvalid={!usernameValid}
                         required
                         minLength={5}
+                        aria-label="Username"
+                        aria-invalid={!usernameValid}
                     />
 
                     <Form.Control.Feedback type="invalid">
@@ -120,6 +131,8 @@ export const SignupView = () => {
                         onBlur={validateFormPassword}
                         isInvalid={!passwordValid}
                         required
+                        aria-label="Password"
+                        aria-invalid={!passwordValid}
                     />
 
                     <Form.Control.Feedback type="invalid">
@@ -128,6 +141,32 @@ export const SignupView = () => {
 
                 </FloatingLabel>
             </Form.Group>
+
+            <Form.Group controlId="confirmPassword">
+
+                <FloatingLabel
+                    controlId="confirmPassword"
+                    label="Confirm Password"
+                    className="mb-3"
+                >
+                    <Form.Control
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        onBlur={validateFormConfirmPassword}
+                        isInvalid={!confirmPasswordValid}
+                        required
+                        aria-label="Confirm Password"
+                        aria-invalid={!confirmPasswordValid}
+                    />
+
+                    <Form.Control.Feedback type="invalid">
+                        Passwords do not match
+                    </Form.Control.Feedback>
+
+                </FloatingLabel>
+            </Form.Group>
+
 
             <Form.Group controlId="signupEmail">
                 <FloatingLabel
@@ -142,6 +181,8 @@ export const SignupView = () => {
                         onBlur={validateFormEmail}
                         isInvalid={!emailValid}
                         required
+                        aria-label="Email"
+                        aria-invalid={!emailValid}
                     />
 
                     <Form.Control.Feedback type="invalid">
@@ -164,6 +205,8 @@ export const SignupView = () => {
                         onBlur={validateFormBirthDate}
                         isInvalid={!birthDateValid}
                         required
+                        aria-label="Birthday"
+                        aria-invalid={!birthDateValid}
                     />
 
                     <Form.Control.Feedback type="invalid">
@@ -178,6 +221,5 @@ export const SignupView = () => {
             </Button>
 
         </Form>
-
     );
 };
