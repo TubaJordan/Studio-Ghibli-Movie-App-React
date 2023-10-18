@@ -1,29 +1,56 @@
-# A Studio Ghibli based movie app that allows the user to learn more about each film.
+# Studio Ghibli Movie App (React Version)
 
-Create by Jordan Nelson as part of their Career Foundry portfolio application project
+## Table of Contents
+1. [Overview](#overview)
+2. [Live Demo](#live-site)
+3. [Built With](#built-with)
+4. [API Used](#api-used)
+5. [Additional Information](#additional-information)
 
-## Project Description
-This application is a user friendly and visually pleasing app that allows a user to browse, sort, search, and favorite different movies created or produced by Studio Ghibli. Through the user experience, the user will notice a clean user interface that allows for responsive browsing across all platforms, including mobile, desktop, and for screen reading applications. Each user must create an account prior to using the app and will save their favorite movies, allow the user to update their profile information, and delete their account if desired. A easy to use navigation bar hold easy to use features such as sorting movies by various specifications, search for a specific movie, access their profile, return to the main screen, and logout. 
+## Overview
 
-## Live Site
-You can view the live site on Netlify
+This application is a user-friendly and visually pleasing app that allows users to browse, sort, search, and favorite different movies created or produced by Studio Ghibli. The interface is clean, intuitive, and responsive across all platforms, including mobile, desktop, and screen readers. To utilize the app's features, users must create an account. Once registered, they can save their favorite movies, update profile information, and delete their account if desired. A user-friendly navigation bar offers features like sorting movies by various specifications, searching for a specific movie, accessing profile details, returning to the main screen, and logging out.
+
+## Live Demo
+
 [Click here for the Live Site](https://ghibli-movie-collection.netlify.app)
 
-## Project Dependencies
-- HTML
-- CSS(SCSS)
-- JavaScript
-- Bootstrap 5.3.0
-- Prop-Types 15.8.1
-- React 18.2.0
-- React-Bootstrap 2.8.0
-- React-DOM 18.2.0
-- React-Router 6.14.1
-- React-Router-DOM 6.14.1
-- @parcel/transformer-sass 2.9.3
-- Parcel 2.9.3
-- Process 0.11.10
+## Built With
 
-## API
-- Ghibli Movie API
+- **HTML**
+- **CSS (SCSS)**
+- [**Bootstrap**](https://getbootstrap.com/) - `5.3.0`
+- [**Prop-Types**](https://www.npmjs.com/package/prop-types) - `15.8.1`
+- [**React**](https://reactjs.org/) - `18.2.0`
+  - **React-Bootstrap** - `2.8.0`
+  - **React-DOM** - `18.2.0`
+  - **React-Router** - `6.14.1`
+  - **React-Router-DOM** - `6.14.1`
+- [**Parcel**](https://parceljs.org/) - `2.9.3`
+  - **@parcel/transformer-sass** - `2.9.3`
+- [**Process**](https://www.npmjs.com/package/process) - `0.11.10`
+
+## API Used
+
+- [**Ghibli Movie API**](https://github.com/TubaJordan/movie_api)
+
+## Additional Information
+
+### Running the App Locally
+
+To run the application on your local machine:
+
+1. **Clone the Repository**: Clone this repository to your local machine.
+2. **Install Dependencies**: Navigate to the project directory in your terminal and run `npm install` to install all required dependencies.
+3. **Starting the App**: Once all dependencies are installed, you can run `npm start` to start the local development server.
+4. **View in Browser**: Open a web browser and go to `http://localhost:3000` (or the port shown in your terminal) to view the app.
+
+### Development Notes
+
+- **Styling**: This application uses Bootstrap for styling, combined with custom SCSS. 
+- **Routing**: Routing is handled using `react-router` and `react-router-dom`.
+- **State Management**: Local component state is used for state management.
+- **Bundling**: The app uses Parcel for bundling and transpiling.
+
+Feel free to contribute, raise issues, or provide feedback to improve the application.
  
