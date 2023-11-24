@@ -1,5 +1,7 @@
 # Studio Ghibli Movie App (React Version)
 
+<img src="https://github.com/TubaJordan/Portfolio/blob/main/images/React-Ghibli-Display.png">
+
 ## Table of Contents
 - [Overview](#overview)
 - [Live Demo](#live-demo)
