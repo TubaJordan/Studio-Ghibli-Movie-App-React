@@ -43,7 +43,7 @@ This application is a user-friendly and visually pleasing app that allows users 
 
 ## API Used
 
-- [**Ghibli Movie API**](https://github.com/TubaJordan/movie_api)
+- [**Ghibli Movie API**](https://github.com/TubaJordan/Studio-Ghibli-Movie-API)
 
 ## Getting Started
 
